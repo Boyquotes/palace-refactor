@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://mwihk3tfsue0"]
+
+[ext_resource type="PackedScene" uid="uid://cu7j23vqww6cr" path="res://Scenes/Objects/Stages/stage_floor_1.tscn" id="1_72ov4"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Stage_Floor1" parent="." instance=ExtResource("1_72ov4")]

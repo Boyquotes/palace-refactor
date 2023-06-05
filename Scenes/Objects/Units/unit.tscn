@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ekwjtic6ecs"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Units/unit.gd" id="1_v2ntb"]
+
+[node name="unit" type="Node2D"]
+script = ExtResource("1_v2ntb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

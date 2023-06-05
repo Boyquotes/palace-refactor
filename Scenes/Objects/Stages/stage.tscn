@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://blyalgsj1hbd4"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Stages/stage.gd" id="1_3ppye"]
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_3ppye")
+
+[node name="Grid" type="Node2D" parent="."]
+
+[node name="Overlay" type="Node2D" parent="."]
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

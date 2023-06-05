@@ -1,0 +1,13 @@
+extends Node
+
+const DIRECTIONS = {UP = Vector2i(0, -1), UP_RIGHT = Vector2i(1, -1), RIGHT = Vector2i(1, 0),
+	DOWN_RIGHT = Vector2i(1, 1), DOWN = Vector2i(0, 1), DOWN_LEFT = Vector2i(-1, 1),
+	LEFT = Vector2i(-1, 0), UP_LEFT = Vector2i(-1, -1)}
+
+enum LOCATIONS {IDLE, ON_PLATFORM, AT_WALL}
+enum TERRAINS {DEFAULT, PLATFORM, OBSTRUCTION}
+
+enum UNIT_STATES {IDLE, HITSTUN, WINDUP}
+enum ENEMY_STATES {IDLE, WINDUP}
+
+enum ACTION_TYPES {MOVEMENT, ATTACK, SKILLS}
