@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Action" load_steps=3 format=3 uid="uid://d3nmwonmtjgp3"]
+
+[ext_resource type="Script" path="res://Resources/Scripts/Action.gd" id="1_40tr5"]
+[ext_resource type="Texture2D" uid="uid://hx05vxbmbkmm" path="res://Assets/Sprites/Buttons/jump_button_tex.png" id="1_klxf0"]
+
+[resource]
+script = ExtResource("1_40tr5")
+id = "jump"
+button_icon = ExtResource("1_klxf0")
+type = 0
+time = 1
+scope = [Vector2i(0, -1), Vector2i(-1, -1), Vector2i(1, -1)]
+aoe = []
+power = 0

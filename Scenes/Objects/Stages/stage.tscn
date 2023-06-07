@@ -20,6 +20,27 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
+[node name="Move_Container" type="HFlowContainer" parent="Buttons"]
+layout_mode = 2
+offset_left = 120.0
+offset_top = 260.0
+offset_right = 240.0
+offset_bottom = 300.0
+
+[node name="Attack_Container" type="HFlowContainer" parent="Buttons"]
+layout_mode = 2
+offset_left = 260.0
+offset_top = 260.0
+offset_right = 380.0
+offset_bottom = 300.0
+
+[node name="Skill_Container" type="HFlowContainer" parent="Buttons"]
+layout_mode = 2
+offset_left = 400.0
+offset_top = 260.0
+offset_right = 520.0
+offset_bottom = 300.0
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

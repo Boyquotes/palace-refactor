@@ -3,7 +3,7 @@ extends Node
 const SFX_SCENE = preload('res://Scenes/System/sfx.tscn')
 
 # ---------- RUN INFO -----------------------
-var units_info = {0: UnitInfo.new(100), 1: null, 2: null, 3: null} # saves unit info across stages
+var units_info = {0: null, 1: null, 2: null, 3: null} # saves unit info across stages
 var money = 0
 
 # ---------- GRID VARS --------------------

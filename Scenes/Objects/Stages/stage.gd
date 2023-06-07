@@ -2,7 +2,7 @@
 # inheritors have custom generation code, visuals, grid sizes, etc.
 extends Node2D
 
-signal unit_spawned
+signal position_select(grid_p)
 
 const TILE_SCENE = preload("res://Scenes/System/tile.tscn")
 const CELL_SIZE = Vector2i(25, 25)
@@ -15,7 +15,7 @@ enum PHASES {PLAYER, ENEMY}
 @export var difficulty = 0
 
 # ------ VARIABLES FOR FUNCTIONALITY --------------
-var current_mode = MODES.GRID_SELECT # affects what player input does
+var current_mode = MODES.SPAWN_SELECT # affects what player input does
 var current_phase = PHASES.PLAYER # keeps track of player/enemy phase
 var selected_action : Action
 var selected_tile
@@ -35,7 +35,7 @@ func _ready():
 	# setup grid
 	Global.grid = Grid.new(grid_size, CELL_SIZE)
 	
-	var base_p = Vector2i(320 - (grid_size * CELL_SIZE / 2).x, 240 - (grid_size * CELL_SIZE).y)
+	var base_p = Vector2i(320 - (grid_size * CELL_SIZE / 2).x, 210 - (grid_size * CELL_SIZE).y)
 	$Grid.position = base_p
 	$Overlay.position = base_p
 	$Units.position = base_p
@@ -97,7 +97,8 @@ func _on_Tile_Selected(tile):
 				current_mode = MODES.GRID_SELECT
 			clear_tiles()
 		MODES.SPAWN_SELECT:
-			pass
+			if tile.grid_p in Global.spawn_pts:
+				emit_signal('position_select', tile.grid_p)
 		MODES.WATCH_PHASE:
 			pass
 
@@ -109,9 +110,9 @@ func _on_Action_Chosen(action):
 	
 	var base = selected_unit.grid_p
 	for v in action.scope:
-		var p = base
-		if selected_unit.flip_h: p += Vector2i(-v.x, v.y)
-		else: p += v
+		var p = base + v
+	#	if selected_unit.flip_h: p += Vector2i(-v.x, v.y)
+	#	else: p += v
 		if Global.grid.is_within_bounds(p):
 			Global.grid_to_tile[p].set_available(action.type)
 	
@@ -122,24 +123,55 @@ func _on_End_Phase():
 #-------------------INTERNAL FUNCTIONS-------------------------
 # add unit scenes to Units node, keep invisible
 func _initialize_units():
-	pass
+	for unit_info in Global.units_info.values():
+		if !unit_info:
+			continue
+		var unit = load('res://Scenes/Objects/Units/'+unit_info.unit_name+'.tscn').instantiate()
+		unit.unit_info = unit_info
+		unit.visible = false
+		$Units.add_child(unit)
+			
 
 # buttons and status bars
 func _initialize_UI():
-	pass
+	# buttons
+	for unit in $Units.get_children():
+		for action in unit.ACTIONS.values():
+			var new_button = load('res://Scenes/UI/action_button.tscn').instantiate()
+			new_button.action = action
+			button_dict[action] = new_button
+			
+			match action.type:
+				Constants.ACTION_TYPES.MOVEMENT:
+					$Buttons/Move_Container.add_child(new_button)
+				Constants.ACTION_TYPES.ATTACK:
+					$Buttons/Attack_Container.add_child(new_button)
+				Constants.ACTION_TYPES.SKILLS:
+					$Buttons/Skill_Container.add_child(new_button)
+			
+	$Buttons.visible = false
 
 # wait for player to click starting squares until all units spawned.
-# temp: just pick 4 and start game.
 func _spawn_units():
-	pass
+	for unit in $Units.get_children():
+		var grid_p = await position_select
+		Global.spawn_pts.erase(grid_p)
+		Global.grid_to_unit[grid_p] = unit
+		unit.grid_p = grid_p
+		unit.position = Global.grid_to_tile[grid_p].position
+		unit.visible = true
+		
+	current_mode = MODES.GRID_SELECT
 
 #================================================================
 #---------------EXTERNAL FUNCTIONS-----------------------------
 func select_unit(unit):
-	pass
+	$Buttons.visible = true
+	selected_unit = unit
 	
 func deselect_unit():
-	pass
+	$Buttons.visible = false
+	selected_unit = null
 	
 func clear_tiles():
 	for i in range(Global.grid.size.x):
@@ -155,3 +187,7 @@ func clear_tiles():
 # calculates possible spawn points
 func _generate_stage():
 	print('generation algorithm missing!')
+	
+	# for testing
+	Global.units_info[0] = UnitInfo.new(100)
+	Global.spawn_pts = [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3)]

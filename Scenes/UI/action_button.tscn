@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1iaatc6t6url"]
+
+[ext_resource type="Theme" uid="uid://b4vde7fsgluqs" path="res://Resources/Buttons/skill_button_theme.tres" id="1_oyuir"]
+[ext_resource type="ButtonGroup" uid="uid://d4avcqrb6idgr" path="res://Resources/Buttons/action_button_group.tres" id="1_u5817"]
+[ext_resource type="Texture2D" uid="uid://hx05vxbmbkmm" path="res://Assets/Sprites/Buttons/jump_button_tex.png" id="2_du8pi"]
+[ext_resource type="Script" path="res://Scenes/UI/action_button.gd" id="4_i1nqj"]
+
+[node name="ActionButton" type="Button"]
+custom_minimum_size = Vector2(34, 34)
+anchors_preset = -1
+anchor_right = 0.053125
+anchor_bottom = 0.0944444
+focus_mode = 0
+theme = ExtResource("1_oyuir")
+toggle_mode = true
+action_mode = 0
+button_group = ExtResource("1_u5817")
+icon = ExtResource("2_du8pi")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_i1nqj")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

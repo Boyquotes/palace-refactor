@@ -1,12 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://1cy258i7sios"]
+[gd_scene load_steps=12 format=3 uid="uid://1cy258i7sios"]
 
-[ext_resource type="PackedScene" uid="uid://ekwjtic6ecs" path="res://Scenes/Objects/Units/unit.tscn" id="1_d3gwa"]
+[ext_resource type="Texture2D" uid="uid://4tw2u1h0t6lo" path="res://Assets/Sprites/Units/avatar_spritesheet.png" id="2_koprf"]
+[ext_resource type="Script" path="res://Scenes/Objects/Units/hunter.gd" id="2_okvuj"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amwxj"]
 
-[node name="Hunter" instance=ExtResource("1_d3gwa")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6emw1"]
+atlas = ExtResource("2_koprf")
+region = Rect2(0, 0, 32, 32)
 
-[node name="AnimationPlayer" parent="." index="0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew5tm"]
+atlas = ExtResource("2_koprf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpq1d"]
+atlas = ExtResource("2_koprf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44xp5"]
+atlas = ExtResource("2_koprf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61vkm"]
+atlas = ExtResource("2_koprf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3ysr"]
+atlas = ExtResource("2_koprf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh46u"]
+atlas = ExtResource("2_koprf")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fu8lt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6emw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ew5tm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpq1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44xp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61vkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3ysr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh46u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Hunter" type="Node2D"]
+script = ExtResource("2_okvuj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_amwxj")
 }
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fu8lt")
