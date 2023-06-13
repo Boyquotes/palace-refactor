@@ -87,12 +87,14 @@ func _on_Tile_Selected(tile):
 			if tile.available:
 				# play sfx, set unit as inactive, check other units, end phase
 				#Global.play_sfx('blip2.wav')
-				current_mode = MODES.GRID_SELECT # temp
+				current_mode = MODES.WATCH_PHASE # temp
 				selected_tile.selected = false
 				selected_tile = null
-				# move unit
+				# perform action
 				selected_unit.perform_action(selected_action, tile.grid_p)
 				deselect_unit()
+				await SignalBus.end_turn
+				_check_active_units()
 			else:
 				current_mode = MODES.GRID_SELECT
 			clear_tiles()
@@ -116,8 +118,9 @@ func _on_Action_Chosen(action):
 		if Global.grid.is_within_bounds(p):
 			Global.grid_to_tile[p].set_available(action.type)
 	
+# set all units active. initiate player or enemy phase.
 func _on_End_Phase():
-	pass
+	print('phase end')
 
 #=======================================================
 #-------------------INTERNAL FUNCTIONS-------------------------
@@ -162,6 +165,13 @@ func _spawn_units():
 		unit.visible = true
 		
 	current_mode = MODES.GRID_SELECT
+	
+func _check_active_units():
+	for unit in $Units.get_children():
+		if unit.active:
+			current_phase = MODES.GRID_SELECT
+			return
+	SignalBus.emit_signal('end_phase')
 
 #================================================================
 #---------------EXTERNAL FUNCTIONS-----------------------------

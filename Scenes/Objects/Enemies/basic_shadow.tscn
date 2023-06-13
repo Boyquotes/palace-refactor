@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://clxglkanyttkr"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Enemies/basic_shadow.gd" id="1_mexo7"]
+
+[node name="basic_shadow" type="Node2D"]
+script = ExtResource("1_mexo7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

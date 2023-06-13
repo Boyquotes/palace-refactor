@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://blyalgsj1hbd4"]
+[gd_scene load_steps=5 format=3 uid="uid://blyalgsj1hbd4"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Stages/stage.gd" id="1_3ppye"]
+[ext_resource type="Texture2D" uid="uid://c5pfdproebqss" path="res://Assets/Sprites/Buttons/divider.png" id="2_8tlkm"]
+[ext_resource type="Texture2D" uid="uid://3oq43uum6cqb" path="res://Assets/Sprites/Environment/temp_background.png" id="2_cgdj0"]
+[ext_resource type="PackedScene" uid="uid://egf17oocwxru" path="res://Scenes/UI/unit_info_ui.tscn" id="4_jeqjd"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_3ppye")
+
+[node name="Temp" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("2_cgdj0")
 
 [node name="Grid" type="Node2D" parent="."]
 
@@ -16,8 +23,9 @@ script = ExtResource("1_3ppye")
 [node name="Buttons" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -20.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 20.0
 mouse_filter = 2
 
 [node name="Move_Container" type="HFlowContainer" parent="Buttons"]
@@ -27,12 +35,32 @@ offset_top = 260.0
 offset_right = 240.0
 offset_bottom = 300.0
 
+[node name="Divider0" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 258.0
+offset_right = 290.0
+offset_bottom = 298.0
+mouse_filter = 2
+texture = ExtResource("2_8tlkm")
+stretch_mode = 2
+
 [node name="Attack_Container" type="HFlowContainer" parent="Buttons"]
 layout_mode = 2
 offset_left = 260.0
 offset_top = 260.0
 offset_right = 380.0
 offset_bottom = 300.0
+
+[node name="Divider1" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 258.0
+offset_right = 430.0
+offset_bottom = 298.0
+mouse_filter = 2
+texture = ExtResource("2_8tlkm")
+stretch_mode = 2
 
 [node name="Skill_Container" type="HFlowContainer" parent="Buttons"]
 layout_mode = 2
@@ -47,3 +75,14 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 47.0
+offset_bottom = 189.0
+theme_override_constants/separation = 50
+
+[node name="unit_info_ui" parent="UI/VBoxContainer" instance=ExtResource("4_jeqjd")]
+layout_mode = 2

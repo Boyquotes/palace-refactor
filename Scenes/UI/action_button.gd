@@ -18,3 +18,7 @@ func _on_toggled(_button_pressed):
 		SignalBus.emit_signal('action_chosen', action)
 	else:
 		pass
+
+
+func _on_hidden():
+	button_pressed = false

@@ -10,6 +10,8 @@ custom_minimum_size = Vector2(34, 34)
 anchors_preset = -1
 anchor_right = 0.053125
 anchor_bottom = 0.0944444
+offset_right = -17.0
+offset_bottom = -17.0
 focus_mode = 0
 theme = ExtResource("1_oyuir")
 toggle_mode = true
@@ -21,4 +23,5 @@ expand_icon = true
 script = ExtResource("4_i1nqj")
 metadata/_edit_use_anchors_ = true
 
+[connection signal="hidden" from="." to="." method="_on_hidden"]
 [connection signal="toggled" from="." to="." method="_on_toggled"]

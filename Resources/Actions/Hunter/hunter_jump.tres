@@ -9,6 +9,6 @@ id = "jump"
 button_icon = ExtResource("1_klxf0")
 type = 0
 time = 1
-scope = [Vector2i(0, -1), Vector2i(-1, -1), Vector2i(1, -1)]
+scope = [Vector2i(0, -1), Vector2i(-1, -1), Vector2i(1, -1), Vector2i(0, -2)]
 aoe = []
 power = 0
